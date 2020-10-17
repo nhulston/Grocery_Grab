@@ -15,6 +15,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -65,6 +68,9 @@ public class ShoppingListFragment extends Fragment {
             "Bathroom cleaner", "Bleach", "Detergent", "Dish soap", "Garbage bags", "Glass cleaner", "Mop head", "Vacuum bags", "Sponges", "Notepad", "Envelopes", "Glue", "Tape", "Paper", "Pens", "Pencils",
             "Postage stamps", "Automotive", "Batteries", "Charcoal", "Propane", "Flowers", "Greeting card", "Insect repellent", "Light bulbs", "Newspaper", "Magazine", "Water"
     };
+    private AutoCompleteTextView editText;
+    private ImageView plusButton;
+    private ArrayAdapter<String> adapter;
 
     @Nullable
     @Override
@@ -72,45 +78,17 @@ public class ShoppingListFragment extends Fragment {
         final ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_shopping_list, container, false);
         final Context context = getContext();
 
-        final AutoCompleteTextView editText = root.findViewById(R.id.chooseItemText);
-        final ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, ITEMS);
+        editText = root.findViewById(R.id.chooseItemText);
+        plusButton = root.findViewById(R.id.plus_icon);
+
+        adapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, ITEMS);
         editText.setAdapter(adapter);
 
         editText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                String item = adapter.getItem(position);
-                editText.setText("");
-
-                final LinearLayout linearLayout = root.findViewById(R.id.scroll);
-
-                final RadioButton btn = new RadioButton(context);
-                linearLayout.addView(btn);
-                btn.setText(item);
-                btn.setTextColor(getResources().getColor(R.color.primaryText));
-                btn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT
-                );
-                params.setMargins(15,30,0,30);
-                btn.setLayoutParams(params);
-                btn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        String s = (String) btn.getText();
-                        Cart.getCart().add(s);
-                        linearLayout.removeView(btn);
-                        TextView tv = root.findViewById(R.id.cart_count);
-                        tv.setText(String.valueOf(Integer.parseInt(tv.getText().toString()) + 1));
-                    }
-                });
-
-                Toast t = Toast.makeText(context, "Item added to list", Toast.LENGTH_LONG);
-                t.setGravity(Gravity.TOP, 0, 0);
-                t.show();
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                showAddItemLayout(position, context, root);
             }
         });
 
@@ -200,6 +178,39 @@ public class ShoppingListFragment extends Fragment {
 
         };
         queue.add(getRequest);
+    }
+
+    public void showAddItemLayout(int position, Context context, final ViewGroup root){
+        String item = adapter.getItem(position);
+        editText.setText("");
+
+        final LinearLayout linearLayout = root.findViewById(R.id.scroll);
+
+        final RadioButton btn = new RadioButton(context);
+        linearLayout.addView(btn);
+        btn.setText(item);
+        btn.setTextColor(getResources().getColor(R.color.primaryText));
+        btn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        params.setMargins(15,30,0,30);
+        btn.setLayoutParams(params);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String s = (String) btn.getText();
+                Cart.getCart().add(s);
+                linearLayout.removeView(btn);
+                TextView tv = root.findViewById(R.id.cart_count);
+                tv.setText(String.valueOf(Integer.parseInt(tv.getText().toString()) + 1));
+            }
+        });
+
+        Toast t = Toast.makeText(context, "Item added to list", Toast.LENGTH_LONG);
+        t.setGravity(Gravity.TOP, 0, 0);
+        t.show();
     }
 
 }
