@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import com.smithbois.grocerygrab.fragments.ARFragment;
 import com.smithbois.grocerygrab.fragments.PostTestFragment;
 import com.smithbois.grocerygrab.fragments.ShoppingListFragment;
 import com.smithbois.grocerygrab.fragments.login.LoginTabFragment;
@@ -36,8 +37,8 @@ public class DashboardAdapter extends FragmentPagerAdapter {
                 PostTestFragment postTestFragment = new PostTestFragment();
                 return postTestFragment;
             case 2:
-                ShoppingListFragment shoppingListFragment3 = new ShoppingListFragment();
-                return shoppingListFragment3;
+                ARFragment arFragment = new ARFragment();
+                return arFragment;
             default:
                 return null;
         }

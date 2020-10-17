@@ -202,7 +202,4 @@ public class ShoppingListFragment extends Fragment {
         queue.add(getRequest);
     }
 
-    private void uupdateHint() {
-
-    }
 }
