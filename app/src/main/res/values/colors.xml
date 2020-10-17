@@ -16,4 +16,11 @@
     <color name="primaryBackground">#FFFFFF</color>
     <color name="secondaryBackground">#EFEFF4</color>
     <color name="tertiaryBackground">#DBDBDB</color>
+    <color name="uiPink">#EE586B</color>
+    <color name="uiPurple">#A35DD7</color>
+    <color name="uiBlue">#2E7DF7</color>
+    <color name="uiTeal">#008FB2</color>
+    <color name="uiGreen">#469F3D</color>
+    <color name="uiOrange">#F0681E</color>
+    <color name="uiRed">#FF3B30</color>
 </resources>
