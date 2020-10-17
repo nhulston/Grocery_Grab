@@ -1,21 +1,24 @@
 package com.smithbois.grocerygrab.activities;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.smithbois.grocerygrab.R;
+import com.smithbois.grocerygrab.util.Cart;
 
 public class DashboardActivity extends AppCompatActivity {
 
@@ -38,13 +41,15 @@ public class DashboardActivity extends AppCompatActivity {
             "Sunblock", "Toilet paper", "Toothpaste", "Vitamins", "Supplements", "Allergy", "Antibiotic", "Antidiarrheal", "Aspirin", "Antacid", "Band-aids", "Medical", "Cold medication", "Flu medicatoin",
             "Sinus medication", "Pain reliever", "Prescription pick-up", "Aluminum foil", "Napkins", "Non-stick spray", "Paper towels", "Plastic wrap", "Sandwich bags", "Freezer bags", "Wax paper", "Air freshener",
             "Bathroom cleaner", "Bleach", "Detergent", "Dish soap", "Garbage bags", "Glass cleaner", "Mop head", "Vacuum bags", "Sponges", "Notepad", "Envelopes", "Glue", "Tape", "Paper", "Pens", "Pencils",
-            "Postage stamps", "Automotive", "Batteries", "Charcoal", "Propane", "Flowers", "Greeting card", "Insect repellent", "Light bulbs", "Newspaper", "Magazine"
+            "Postage stamps", "Automotive", "Batteries", "Charcoal", "Propane", "Flowers", "Greeting card", "Insect repellent", "Light bulbs", "Newspaper", "Magazine", "Water"
     };
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_shopping_list);
+
+        final Context context = this;
 
         final AutoCompleteTextView editText = findViewById(R.id.chooseItemText);
         final ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, ITEMS);
@@ -56,8 +61,31 @@ public class DashboardActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 String item = adapter.getItem(position);
-                System.out.println(item);
                 editText.setText("");
+
+                final LinearLayout linearLayout = findViewById(R.id.scroll);
+
+                final RadioButton btn = new RadioButton(context);
+                linearLayout.addView(btn);
+                btn.setText(item);
+                btn.setTextColor(getResources().getColor(R.color.primaryText));
+                btn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                );
+                params.setMargins(15,30,0,30);
+                btn.setLayoutParams(params);
+                btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String s = (String) btn.getText();
+                        Cart.getCart().add(s);
+                        linearLayout.removeView(btn);
+                        TextView tv = findViewById(R.id.cart_count);
+                        tv.setText(String.valueOf(Integer.parseInt(tv.getText().toString()) + 1));
+                    }
+                });
 
                 Toast t = Toast.makeText(getBaseContext(), "Item added to list", Toast.LENGTH_LONG);
                 t.setGravity(Gravity.TOP, 0, 0);
@@ -65,6 +93,13 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.back_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                findViewById(R.id.invis_layout).setVisibility(View.GONE);
+                findViewById(R.id.fade_rectangle).setVisibility(View.GONE);
+            }
+        });
 
         Button addButton = findViewById(R.id.add_button);
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -72,6 +107,14 @@ public class DashboardActivity extends AppCompatActivity {
             public void onClick(View v) {
                 findViewById(R.id.invis_layout).setVisibility(View.VISIBLE);
                 findViewById(R.id.fade_rectangle).setVisibility(View.VISIBLE);
+            }
+        });
+
+        findViewById(R.id.fade_rectangle).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                findViewById(R.id.fade_rectangle).setVisibility(View.GONE);
+                findViewById(R.id.invis_layout).setVisibility(View.GONE);
             }
         });
     }
