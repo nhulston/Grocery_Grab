@@ -3,6 +3,7 @@ package com.smithbois.grocerygrab.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -19,10 +20,15 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.smithbois.grocerygrab.R;
 import com.smithbois.grocerygrab.util.Cart;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class ShoppingListFragment extends Fragment {
 
@@ -120,8 +126,14 @@ public class ShoppingListFragment extends Fragment {
                 root.findViewById(R.id.invis_layout).setVisibility(View.GONE);
             }
         });
+
+        root.findViewById(R.id.cart_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                root.findViewById(R.id.cart).setVisibility(View.VISIBLE);
+            }
+        });
+
         return root;
     }
-
-
 }
