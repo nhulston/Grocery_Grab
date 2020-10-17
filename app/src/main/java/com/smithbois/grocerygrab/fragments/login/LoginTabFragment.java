@@ -1,4 +1,4 @@
-package com.smithbois.grocerygrab.fragments;
+package com.smithbois.grocerygrab.fragments.login;
 
 import android.content.Context;
 import android.content.Intent;
@@ -34,6 +34,7 @@ public class LoginTabFragment extends Fragment {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                System.out.println("segueing to dashboard activity");
                 Intent intent = new Intent(getActivity(), DashboardActivity.class);
                 startActivity(intent);
             }

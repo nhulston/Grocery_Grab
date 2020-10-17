@@ -1,4 +1,4 @@
-package com.smithbois.grocerygrab.fragments;
+package com.smithbois.grocerygrab.fragments.login;
 
 import android.content.Context;
 import android.os.Bundle;

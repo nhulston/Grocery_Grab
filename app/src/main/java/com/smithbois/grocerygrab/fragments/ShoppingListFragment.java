@@ -1,66 +1,127 @@
 package com.smithbois.grocerygrab.fragments;
 
+
+import android.content.Context;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.smithbois.grocerygrab.R;
+import com.smithbois.grocerygrab.util.Cart;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ShoppingListFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ShoppingListFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String[] ITEMS = new String[] {
+            "Asparagus", "Broccoli", "Carrots", "Cauliflower", "Celery", "Corn", "Cucumbers", "Lettuce", "Greens", "Mushrooms", "Onions", "Peppers", "Potatoes", "Spinach", "Squash", "Zucchini", "Tomatoes",
+            "Apples", "Avocados", "Bananas", "Berries", "Cherries", "Grapefruit", "Grapes", "Kiwis", "Lemons", "Limes", "Melon", "Oranges", "Peaches", "Nectarines", "Pears", "Plums", "Bagels", "Chip dip",
+            "English muffins", "Eggs", "Fruit juice", "Hummus", "Ready-bake breads", "Tofu", "Tortillas", "Breakfasts", "Burritos", "Fish sticks", "Ice cream", "Sorbet", "Juice concentrate", "Pizza", "Pizza Rolls",
+            "Popsicles", "Fries", "Tater tots", "TV dinners", "Vegetables", "Veggie burgers", "BBQ sauce", "Gravy", "Honey", "Hot sauce", "Jam / Jelly", "Ketchup", "Mustard", "Mayonnaise", "Pasta sauce", "Relish",
+            "Salad dressing", "Salsa", "Soy sauce", "Steak sauce", "Syrup", "Worcestershire sauce", "Bouillon cubes", "Cereal", "Coffee", "Coffe filters", "Instant potatoes", "Lemon juice", "Lime juice", "Mac and cheese",
+            "Olive oil", "Pancake mix", "Waffle mix", "Pasta", "Peanut butter", "Pickles", "Rice", "Tea", "Vegetable oil", "Vinegar", "Applesauce", "Baked beans", "Chili", "Fruit", "Olives", "Tinned meats", "Tuna",
+            "Chicken", "Soups", "Veggies", "Basil", "Black pepper", "Cilantro", "Cinnamon", "Garlic", "Ginger", "Mint", "Oregano", "Paprika", "Parsley", "Red pepper", "Salt", "Spice mix", "Vanilla extract",
+            "Butter", "Margarine", "Cottage cheese", "Half & half", "Milk", "Sour cream", "Whipped cream", "Yogurt", "Bleu cheese", "Cheddar", "Cottage cheese", "Cream cheese", "Feta", "Goat cheese", "Mozzarella",
+            "Provolone", "Parmesan", "Provolone", "Ricotta", "Sandwich slices", "Swiss", "Bacon", "Sausage", "Beef", "Chicken", "Ground beef", "Turkey", "Ham", "Pork", "Hot dogs", "Lunchmea", "Catfish", "Crab", "Lobster",
+            "Mussels", "Oysters", "Salmon", "Shrimp", "Tilapia", "Tuna", "Beer", "Club soda", "Tonic", "Champagne", "Gin", "Juice", "Mixers", "Red wine", "White wine", "Rum", "Saké", "Soda pop", "Sports drink", "Whiskey",
+            "Vodka", "Bagels", "Croissants", "Buns", "Rolls", "Cake", "Cookies", "Donuts", "Pastries", "Fresh bread", "Sliced bread", "Pie", "Pita bread", "Baking powder", "Baking soda", "Bread crumbs", "Cake",
+            "Brownie mix", "Icing", "Cake decorations", "Chocolate chips", "Cocoa", "Flour", "Shortening", "Sugar", "Sugar substitute", "Yeast", "Candy", "Gum", "Cookies", "Crackers", "Dried fruit", "Granola bars",
+            "Nuts", "Seeds", "Oatmeal", "Popcorn", "Potato chips", "Pretzels", "Burger night", "Chili night", "Pizza night", "Spaghetti night", "Taco night", "Take-out deli food", "Baby food", "Diapers", "Formula",
+            "Lotion", "Baby wash", "Wipes", "Cat food", "Cat treats", "Cat litter", "Dog food", "Treats", "Flea treatment", "Pet shampoo", "Antiperspirant", "Deodorant", "Bath soap", "Hand soap", "Condoms", "Cosmetics",
+            "Cotton balls", "Facial cleanser", "Facial tissue", "Feminine products", "Floss", "Hair gel", "Hair spray", "Lip balm", "Moisturizing lotion", "Mouthwash", "Razors", "Shaving cream", "Shampoo", "Conditioner",
+            "Sunblock", "Toilet paper", "Toothpaste", "Vitamins", "Supplements", "Allergy", "Antibiotic", "Antidiarrheal", "Aspirin", "Antacid", "Band-aids", "Medical", "Cold medication", "Flu medicatoin",
+            "Sinus medication", "Pain reliever", "Prescription pick-up", "Aluminum foil", "Napkins", "Non-stick spray", "Paper towels", "Plastic wrap", "Sandwich bags", "Freezer bags", "Wax paper", "Air freshener",
+            "Bathroom cleaner", "Bleach", "Detergent", "Dish soap", "Garbage bags", "Glass cleaner", "Mop head", "Vacuum bags", "Sponges", "Notepad", "Envelopes", "Glue", "Tape", "Paper", "Pens", "Pencils",
+            "Postage stamps", "Automotive", "Batteries", "Charcoal", "Propane", "Flowers", "Greeting card", "Insect repellent", "Light bulbs", "Newspaper", "Magazine", "Water"
+    };
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public ShoppingListFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ShoppingList.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ShoppingListFragment newInstance(String param1, String param2) {
-        ShoppingListFragment fragment = new ShoppingListFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
+    @Nullable
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        final ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_shopping_list, container, false);
+        final Context context = getContext();
+
+        final AutoCompleteTextView editText = root.findViewById(R.id.chooseItemText);
+        final ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, ITEMS);
+        editText.setAdapter(adapter);
+
+        editText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                String item = adapter.getItem(position);
+                editText.setText("");
+
+                final LinearLayout linearLayout = root.findViewById(R.id.scroll);
+
+                final RadioButton btn = new RadioButton(context);
+                linearLayout.addView(btn);
+                btn.setText(item);
+                btn.setTextColor(getResources().getColor(R.color.primaryText));
+                btn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                );
+                params.setMargins(15,30,0,30);
+                btn.setLayoutParams(params);
+                btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String s = (String) btn.getText();
+                        Cart.getCart().add(s);
+                        linearLayout.removeView(btn);
+                        TextView tv = root.findViewById(R.id.cart_count);
+                        tv.setText(String.valueOf(Integer.parseInt(tv.getText().toString()) + 1));
+                    }
+                });
+
+                Toast t = Toast.makeText(context, "Item added to list", Toast.LENGTH_LONG);
+                t.setGravity(Gravity.TOP, 0, 0);
+                t.show();
+            }
+        });
+
+        root.findViewById(R.id.back_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                root.findViewById(R.id.invis_layout).setVisibility(View.GONE);
+                root.findViewById(R.id.fade_rectangle).setVisibility(View.GONE);
+            }
+        });
+
+        Button addButton = root.findViewById(R.id.add_button);
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                root.findViewById(R.id.invis_layout).setVisibility(View.VISIBLE);
+                root.findViewById(R.id.fade_rectangle).setVisibility(View.VISIBLE);
+            }
+        });
+
+        root.findViewById(R.id.fade_rectangle).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                root.findViewById(R.id.fade_rectangle).setVisibility(View.GONE);
+                root.findViewById(R.id.invis_layout).setVisibility(View.GONE);
+            }
+        });
+        return root;
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_shopping_list, container, false);
-    }
+
 }
