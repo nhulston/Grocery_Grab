@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
+    android:background="@color/secondaryBackground">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:id="@+id/burger_menu_button"
+            android:background="@drawable/ic_menu"
+            android:layout_centerVertical="true"
+            android:backgroundTint="@color/secondaryText"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/burger_menu_button"
+            android:layout_marginLeft="24dp"
+            android:layout_centerVertical="true"
+            android:fontFamily="@font/roboto"
+            android:text="@string/app_name"
+            android:textSize="23sp" />
+
+        <TextView
+            android:id="@+id/cart_count"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="25dp"
+            android:layout_marginBottom="25dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/circle"
+            android:elevation="10dp"
+            android:fontFamily="@font/roboto"
+            android:gravity="center"
+            android:shadowColor="@android:color/white"
+            android:shadowRadius="10.0"
+            android:text="0"
+            android:textColor="@color/primaryBackground"
+            android:textSize="14sp"
+            android:layout_alignParentEnd="true"
+            />
+
+        <ImageButton
+            android:id="@+id/cart_button"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/cart_icon"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"/>
+
+    </RelativeLayout>
+
+</androidx.appcompat.widget.Toolbar>

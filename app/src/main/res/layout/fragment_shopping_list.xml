@@ -413,25 +413,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/cart_count"
-        android:layout_width="22dp"
-        android:layout_height="22dp"
-        android:layout_gravity="center"
-        android:layout_marginStart="25dp"
-        android:layout_marginBottom="25dp"
-        android:background="@drawable/circle"
-        android:elevation="10dp"
-        android:fontFamily="@font/roboto"
-        android:gravity="center"
-        android:shadowColor="@android:color/white"
-        android:shadowRadius="10.0"
-        android:text="0"
-        android:textColor="@color/primaryBackground"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/cart_button"
-        app:layout_constraintStart_toStartOf="@+id/cart_button" />
+    
 
     <ScrollView
         android:id="@+id/scrollView3"
@@ -453,14 +435,5 @@
         </LinearLayout>
     </ScrollView>
 
-    <ImageButton
-        android:id="@+id/cart_button"
-        android:layout_width="42dp"
-        android:layout_height="42dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/cart_icon"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

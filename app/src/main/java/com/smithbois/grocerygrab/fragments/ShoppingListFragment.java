@@ -138,14 +138,14 @@ public class ShoppingListFragment extends Fragment {
             }
         });
 
-        root.findViewById(R.id.cart_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                root.findViewById(R.id.cart).setVisibility(View.VISIBLE);
-                requestWithSomeHttpHeaders(context);
-                System.out.println(itemCost);
-            }
-        });
+//        root.findViewById(R.id.cart_button).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                root.findViewById(R.id.cart).setVisibility(View.VISIBLE);
+//                requestWithSomeHttpHeaders(context);
+//                System.out.println(itemCost);
+//            }
+//        });
 
         return root;
     }
