@@ -31,6 +31,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.smithbois.grocerygrab.R;
 import com.smithbois.grocerygrab.util.Cart;
 
@@ -130,6 +131,15 @@ public class ShoppingListFragment extends Fragment {
             }
         });
 
+        FloatingActionButton fButton = root.findViewById(R.id.floatingActionButton);
+        fButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                root.findViewById(R.id.invis_layout).setVisibility(View.VISIBLE);
+                root.findViewById(R.id.fade_rectangle).setVisibility(View.VISIBLE);
+            }
+        });
+
         root.findViewById(R.id.fade_rectangle).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -192,7 +202,4 @@ public class ShoppingListFragment extends Fragment {
         queue.add(getRequest);
     }
 
-    private void uupdateHint() {
-
-    }
 }
