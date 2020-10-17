@@ -157,12 +157,13 @@ public class ShoppingListFragment extends Fragment {
                 new Response.Listener<String>()
                 {
                     public void onResponse(String response) {
-                        System.out.println(response);
+                        System.out.println("response: " + response);
                         int a = response.indexOf("\"price\":");
                         int b = response.indexOf(",\"currency\"");
                         double cost = Double.parseDouble(response.substring(a + 8, b));
                         NumberFormat formatter = NumberFormat.getCurrencyInstance();
                         itemCost = formatter.format(cost);
+                        System.out.println("item cost:" + itemCost);
                     }
                 },
                 new Response.ErrorListener()
