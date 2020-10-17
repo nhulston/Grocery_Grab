@@ -10,11 +10,22 @@
         android:id="@+id/title_shoppinglist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="40dp"
-        android:fontFamily="@font/inter_medium"
+        android:layout_marginTop="44dp"
+        android:fontFamily="@font/roboto"
         android:text="Shopping List"
+        android:textColor="@color/primaryText"
         android:textSize="28sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/add_items"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add to Shopping List"
+        android:textColor="@color/white"
+        tools:layout_editor_absoluteX="117dp"
+        tools:layout_editor_absoluteY="190dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

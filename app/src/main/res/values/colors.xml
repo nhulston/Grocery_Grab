@@ -9,6 +9,7 @@
     <color name="primaryText">#000000</color>
     <color name="secondaryText">#993C3C43</color>
     <color name="tertiaryText">#4D3C3C43</color>
+    <color name="whiteText">#5C9DF9</color>
     <color name="primaryBorder">#213C3C43</color>
     <color name="secondaryBorder">#4A3C3C43</color>
     <color name="tertiaryBorder">#000000</color>

@@ -45,33 +45,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        // check if user is signed in
-        int result = 0;
-        if (result == 1) {
-            Handler h = new Handler();
-            Runnable r = new Runnable() {
-                @Override
-                public void run() {
-                    Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
-                    startActivity(intent);
-                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                    finish();
-                }
-            };
-            h.postDelayed(r, SPLASH_SCREEN_DURATION);
-        } else {
-            Handler h = new Handler();
-            Runnable r = new Runnable() {
-                @Override
-                public void run() {
-                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                    finish();
-                }
-            };
-            h.postDelayed(r, SPLASH_SCREEN_DURATION);
+        Handler h = new Handler();
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                finish();
+            }
+        };
+        h.postDelayed(r, SPLASH_SCREEN_DURATION);
 
-        }
     }
 }
