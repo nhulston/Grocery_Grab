@@ -4,6 +4,8 @@ package com.smithbois.grocerygrab.fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.Layout;
+import android.util.Base64;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -23,15 +25,24 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.smithbois.grocerygrab.R;
 import com.smithbois.grocerygrab.util.Cart;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ShoppingListFragment extends Fragment {
 
+    private static String itemCost;
     private static final String[] ITEMS = new String[] {
             "Asparagus", "Broccoli", "Carrots", "Cauliflower", "Celery", "Corn", "Cucumbers", "Lettuce", "Greens", "Mushrooms", "Onions", "Peppers", "Potatoes", "Spinach", "Squash", "Zucchini", "Tomatoes",
             "Apples", "Avocados", "Bananas", "Berries", "Cherries", "Grapefruit", "Grapes", "Kiwis", "Lemons", "Limes", "Melon", "Oranges", "Peaches", "Nectarines", "Pears", "Plums", "Bagels", "Chip dip",
@@ -131,9 +142,53 @@ public class ShoppingListFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 root.findViewById(R.id.cart).setVisibility(View.VISIBLE);
+                requestWithSomeHttpHeaders(context);
+                System.out.println(itemCost);
             }
         });
 
         return root;
+    }
+
+    public void requestWithSomeHttpHeaders(Context context) {
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String url = "https://gateway-staging.ncrcloud.com/catalog/2/item-details/2/102";
+        StringRequest getRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>()
+                {
+                    public void onResponse(String response) {
+                        System.out.println(response);
+                        int a = response.indexOf("\"price\":");
+                        int b = response.indexOf(",\"currency\"");
+                        double cost = Double.parseDouble(response.substring(a + 8, b));
+                        NumberFormat formatter = NumberFormat.getCurrencyInstance();
+                        itemCost = formatter.format(cost);
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // TODO Auto-generated method stub
+                        Log.d("ERROR","error => "+error.toString());
+                    }
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() {
+                HashMap<String, String> params = new HashMap<String, String>();
+                String creds = String.format("%s:%s","ea9fc3bc-e3c9-43cc-96bd-6a6fa3c36751","password123!");
+                String auth = "Basic " + Base64.encodeToString(creds.getBytes(), Base64.DEFAULT);
+                params.put("Authorization", auth);
+
+                params.put("content-type", "application/json");
+                params.put("nep-organization", "aa317d804243466bb23f1a9f236d166d");
+                params.put("nep-enterprise-unit", "b6a4f865404d4b6ab2c70ab1bd9a5b71");
+
+                return params;
+            }
+
+        };
+        queue.add(getRequest);
     }
 }
