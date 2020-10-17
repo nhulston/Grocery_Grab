@@ -51,6 +51,7 @@ public class ARFragment extends Fragment {
                 imm.hideSoftInputFromWindow(editText.getWindowToken(),
                         InputMethodManager.RESULT_UNCHANGED_SHOWN);
                 root.findViewById(R.id.fade_rectangle2).setVisibility(View.GONE);
+                root.findViewById(R.id.temp_image).setVisibility(View.VISIBLE);
             }
         });
         editText.setOnClickListener(new View.OnClickListener() {
