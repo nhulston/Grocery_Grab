@@ -419,8 +419,10 @@
         android:layout_width="22dp"
         android:layout_height="22dp"
         android:layout_gravity="center"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginBottom="25dp"
         android:background="@drawable/circle"
+        android:elevation="10dp"
         android:fontFamily="@font/roboto"
         android:gravity="center"
         android:shadowColor="@android:color/white"
@@ -428,8 +430,8 @@
         android:text="0"
         android:textColor="@color/primaryBackground"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/cart_button"
-        app:layout_constraintTop_toTopOf="@+id/cart_button" />
+        app:layout_constraintBottom_toBottomOf="@+id/cart_button"
+        app:layout_constraintStart_toStartOf="@+id/cart_button" />
 
     <ScrollView
         android:id="@+id/scrollView3"
