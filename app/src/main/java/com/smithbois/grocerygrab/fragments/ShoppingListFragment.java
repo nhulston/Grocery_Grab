@@ -11,6 +11,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -97,6 +98,10 @@ public class ShoppingListFragment extends Fragment {
             public void onClick(View v) {
                 root.findViewById(R.id.invis_layout).setVisibility(View.GONE);
                 root.findViewById(R.id.fade_rectangle).setVisibility(View.GONE);
+
+                InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(editText.getWindowToken(),
+                        InputMethodManager.RESULT_UNCHANGED_SHOWN);
             }
         });
 
@@ -123,6 +128,10 @@ public class ShoppingListFragment extends Fragment {
             public void onClick(View v) {
                 root.findViewById(R.id.fade_rectangle).setVisibility(View.GONE);
                 root.findViewById(R.id.invis_layout).setVisibility(View.GONE);
+
+                InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(editText.getWindowToken(),
+                        InputMethodManager.RESULT_UNCHANGED_SHOWN);
             }
         });
 
