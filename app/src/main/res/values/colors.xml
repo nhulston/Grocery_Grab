@@ -6,4 +6,13 @@
     <color name="magenta">#CF2383</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#0B0A07</color>
+    <color name="primaryText">#000000</color>
+    <color name="secondaryText">#993C3C43</color>
+    <color name="tertiaryText">#4D3C3C43</color>
+    <color name="primaryBorder">#213C3C43</color>
+    <color name="secondaryBorder">#4A3C3C43</color>
+    <color name="tertiaryBorder">#000000</color>
+    <color name="primaryBackground">#FFFFFF</color>
+    <color name="secondaryBackground">#EFEFF4</color>
+    <color name="tertiaryBackground">#DBDBDB</color>
 </resources>
