@@ -16,7 +16,7 @@ import com.smithbois.grocerygrab.activities.DashboardActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static int SPLASH_SCREEN_DURATION = 5000;
+    public static int SPLASH_SCREEN_DURATION = 0;
 
     Animation topAnim, bottomAnim;
     ImageView splashLogo;

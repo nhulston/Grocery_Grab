@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 
 import com.smithbois.grocerygrab.MainActivity;
 import com.smithbois.grocerygrab.R;
+import com.smithbois.grocerygrab.activities.DashboardActivity;
 import com.smithbois.grocerygrab.activities.LoginActivity;
 
 public class LoginTabFragment extends Fragment {
@@ -33,7 +34,7 @@ public class LoginTabFragment extends Fragment {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                Intent intent = new Intent(getActivity(), DashboardActivity.class);
                 startActivity(intent);
             }
         });

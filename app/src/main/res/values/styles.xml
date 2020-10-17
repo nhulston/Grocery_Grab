@@ -4,7 +4,8 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/mainGreen</item>
         <item name="colorPrimaryDark">@color/darkGreen</item>
-        <item name="colorAccent">@color/magenta</item>
+        <item name="colorAccent">@color/uiGreen</item>
+        <item name="android:textColorHint">@color/secondaryText</item>
     </style>
 
 </resources>
