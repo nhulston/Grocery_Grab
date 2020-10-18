@@ -72,7 +72,8 @@ public class ARActivity extends AppCompatActivity {
 
     private void createModel(AnchorNode anchorNode) {
         TransformableNode node = new TransformableNode(arFragment.getTransformationSystem());
-        node.setLocalRotation(Quaternion.axisAngle(new Vector3(1f, 0, 0), 90f));
+        //node.setLocalRotation(Quaternion.axisAngle(new Vector3(1f, 0, 0), 90f));
+        node.setWorldRotation(Quaternion.axisAngle(new Vector3(1f, 0, 0), 90f));
         node.setParent(anchorNode);
         node.setRenderable(modelRenderable);
         node.select();
@@ -92,6 +93,7 @@ public class ARActivity extends AppCompatActivity {
             Node arrow = new Node();
             arrow.setParent(anchorNode);
             arrow.setRenderable(arrowRenderable);
+            //arrow.setWorldRotation(new Quaternion(new Vector3()));
             placed = true;
         }
     }
