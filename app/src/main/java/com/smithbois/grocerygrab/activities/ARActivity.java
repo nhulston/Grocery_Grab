@@ -26,28 +26,15 @@ public class ARActivity extends AppCompatActivity {
 
     private ArFragment arFragment;
     private ModelRenderable modelRenderable;
-    private boolean placed;
-    private Renderable arrowRenderable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_a_r);
 
-        placed = false;
         arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.fragment);
         setupModel();
         setupPlane();
-        arFragment.getArSceneView().getScene().addOnUpdateListener(this::onUpdateFrame);
-        ModelRenderable.builder()
-                .setSource(this, R.raw.materials)
-                .build()
-                .thenAccept(renderable -> arrowRenderable = renderable)
-                .exceptionally(
-                        throwable -> {
-                            System.out.println("Unable to load Renderable.");
-                            return null;
-                        });
     }
 
     private void setupModel() {
@@ -76,25 +63,6 @@ public class ARActivity extends AppCompatActivity {
         node.setParent(anchorNode);
         node.setRenderable(modelRenderable);
         node.select();
-    }
-    public void onUpdateFrame(FrameTime fr) {
-        Frame frame = arFragment.getArSceneView().getArFrame();
-        if(frame == null){
-            return;
-        }
-        if(frame.getCamera().getTrackingState()== TrackingState.TRACKING && !placed){
-            Pose pos = frame.getCamera().getPose().compose(Pose.makeTranslation(0f, 0, -1f));
-            Anchor anchor = arFragment.getArSceneView().getSession().createAnchor(pos);
-            AnchorNode anchorNode = new AnchorNode(anchor);
-            anchorNode.setParent(arFragment.getArSceneView().getScene());
-
-            // Create the arrow node and add it to the anchor.
-            Node arrow = new Node();
-            arrow.setParent(anchorNode);
-            arrow.setRenderable(arrowRenderable);
-            arrow.setWorldRotation(Quaternion.axisAngle(new Vector3(0f, 0, 0), 0f));
-            placed = true;
-        }
     }
 
 }

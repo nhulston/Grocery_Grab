@@ -64,7 +64,7 @@ public class ARFragment extends Fragment {
                 imm.hideSoftInputFromWindow(editText.getWindowToken(),
                         InputMethodManager.RESULT_UNCHANGED_SHOWN);
                 root.findViewById(R.id.fade_rectangle2).setVisibility(View.GONE);
-                root.findViewById(R.id.temp_image).setVisibility(View.VISIBLE);
+                // TODO code here to set map visible!
             }
         });
         editText.setOnClickListener(new View.OnClickListener() {
