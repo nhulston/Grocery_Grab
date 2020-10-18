@@ -48,7 +48,7 @@ public class PostTestFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 try {
-                    ncrRequests.postRequest(context);
+                    ncrRequests.getcatalog(context);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -59,7 +59,11 @@ public class PostTestFragment extends Fragment {
         getTestButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ncrRequests.getRequest(context);
+                try {
+                    ncrRequests.getCart(context);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -67,7 +71,11 @@ public class PostTestFragment extends Fragment {
         createCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ncrRequests.createCart(context);
+                try {
+                    ncrRequests.deleteCart(context);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
