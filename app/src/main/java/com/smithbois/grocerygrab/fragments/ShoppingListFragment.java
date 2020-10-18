@@ -38,6 +38,10 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.smithbois.grocerygrab.R;
 import com.smithbois.grocerygrab.util.Cart;
+import com.smithbois.grocerygrab.util.api.NCRRequests;
+import com.smithbois.grocerygrab.util.pathfinding.Product;
+
+import org.json.JSONException;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -77,12 +81,37 @@ public class ShoppingListFragment extends Fragment {
         final ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_shopping_list, container, false);
         final Context context = getContext();
 
+        try {
+            NCRRequests.createCart(context);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            NCRRequests.getcatalog(context);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         editText = root.findViewById(R.id.chooseItemText);
 
         adapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, ITEMS);
         editText.setAdapter(adapter);
 
-        editText.setOnItemClickListener((parent, view, position, id) -> showAddItemLayout(position, context, root));
+        editText.setOnItemClickListener((parent, view, position, id) -> {
+            try {
+                showAddItemLayout(position, context, root);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        });
+        editText.setOnItemClickListener((parent, view, position, id) -> {
+            try {
+                showAddItemLayout(position, context, root);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        });
 
         root.findViewById(R.id.back_btn).setOnClickListener(v -> {
             root.findViewById(R.id.invis_layout).setVisibility(View.GONE);
@@ -133,8 +162,15 @@ public class ShoppingListFragment extends Fragment {
     }
 
 
-    public void showAddItemLayout(int position, Context context, final ViewGroup root){
+    public void showAddItemLayout(int position, Context context, final ViewGroup root) throws JSONException {
+        String s = editText.getText().toString();
         String item = adapter.getItem(position);
+        for (Product p : NCRRequests.getProducts()){
+            System.out.println("product: " + p.getName());
+        }
+        //System.out.println("products: " + NCRRequests.getProducts());
+        System.out.println("String gotten: " + s);
+        System.out.println("Item: " + item);
         editText.setText("");
 
         final LinearLayout linearLayout = root.findViewById(R.id.scroll);
@@ -154,13 +190,15 @@ public class ShoppingListFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String s = (String) btn.getText();
-                Cart.getCart().add(s);
                 linearLayout.removeView(btn);
                 TextView tv = getActivity().findViewById(R.id.cart_count);
                 tv.setText(String.valueOf(Integer.parseInt(tv.getText().toString()) + 1));
             }
         });
 
+        Cart.getCart().add(NCRRequests.findProductByName(s));
+        NCRRequests.addToCart(context, String.valueOf(NCRRequests.findProductByName(s).getCode()));
+        System.out.println("cart: " + Cart.getCart());
         Toast t = Toast.makeText(context, "Item added to list", Toast.LENGTH_LONG);
         t.setGravity(Gravity.TOP, 0, 0);
         t.show();

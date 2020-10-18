@@ -29,7 +29,10 @@ import com.smithbois.grocerygrab.R;
 import com.smithbois.grocerygrab.activities.ARActivity;
 import com.smithbois.grocerygrab.activities.DashboardActivity;
 import com.smithbois.grocerygrab.util.Cart;
+import com.smithbois.grocerygrab.util.api.NCRRequests;
 import com.smithbois.grocerygrab.util.map.DrawView;
+
+import org.json.JSONException;
 
 public class ARFragment extends Fragment {
 
@@ -43,6 +46,12 @@ public class ARFragment extends Fragment {
         final ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_ar, container, false);
         final Context context = getContext();
         super.onCreate(savedInstanceState);
+
+        try {
+            NCRRequests.getcatalog(context);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         drawView = root.findViewById(R.id.draw_view);
         drawView.setBackgroundColor(Color.WHITE);
@@ -61,9 +70,8 @@ public class ARFragment extends Fragment {
                     InputMethodManager.RESULT_UNCHANGED_SHOWN);
             root.findViewById(R.id.fade_rectangle2).setVisibility(View.GONE);
             editText.setVisibility(View.GONE);
-            root.findViewById(R.id.store_map_text).setVisibility(View.VISIBLE);
+            //root.findViewById(R.id.store_map_text).setVisibility(View.VISIBLE);
             root.findViewById(R.id.draw_view).setVisibility(View.VISIBLE);
-            // TODO code here to set map visible!
         });
         editText.setOnClickListener(v -> {
             editText.showDropDown();

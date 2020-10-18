@@ -3,11 +3,13 @@ package com.smithbois.grocerygrab.activities;
 import android.app.Dialog;
 import android.graphics.BlendMode;
 import android.graphics.BlendModeColorFilter;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
@@ -16,6 +18,8 @@ import com.smithbois.grocerygrab.R;
 import com.smithbois.grocerygrab.adapters.DashboardAdapter;
 import com.smithbois.grocerygrab.dialogs.CheckoutDialog;
 
+import org.json.JSONException;
+
 import java.util.Objects;
 
 public class DashboardActivity extends AppCompatActivity {
@@ -23,6 +27,7 @@ public class DashboardActivity extends AppCompatActivity {
     TabLayout dashboardTabs;
     ViewPager dashboardPager;
 
+    @RequiresApi(api = Build.VERSION_CODES.Q)
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +70,12 @@ public class DashboardActivity extends AppCompatActivity {
 
         ImageButton btn = findViewById(R.id.cart_button);
         btn.setOnClickListener(v -> {
-            Dialog dialog = CheckoutDialog.onCreateDialog(this);
+            Dialog dialog = null;
+            try {
+                dialog = CheckoutDialog.onCreateDialog(this);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             dialog.getWindow().setLayout(10, 500);
             dialog.show();
         });

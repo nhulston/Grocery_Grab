@@ -2,6 +2,7 @@ package com.smithbois.grocerygrab.util.pathfinding;
 
 import android.graphics.Point;
 
+import com.smithbois.grocerygrab.util.Cart;
 import com.smithbois.grocerygrab.util.pathfinding.Product;
 
 import java.util.*;
@@ -41,6 +42,8 @@ public class Driver {
 
 
     public static List<Point> optimizeRoute(int[][] mapArray, List<Product> productList){
+
+
 
        for(Product product : productList){
            mapArray[product.getX()][product.getY()] = product.getCode();

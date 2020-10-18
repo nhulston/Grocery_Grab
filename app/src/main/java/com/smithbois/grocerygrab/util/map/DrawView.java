@@ -12,9 +12,14 @@ import android.view.View;
 import com.smithbois.grocerygrab.R;
 import com.smithbois.grocerygrab.demo.DemoProductList;
 import com.smithbois.grocerygrab.demo.DemoStoreMap;
+import com.smithbois.grocerygrab.util.api.NCRRequests;
 import com.smithbois.grocerygrab.util.pathfinding.Driver;
 import com.smithbois.grocerygrab.util.pathfinding.Product;
 
+import org.json.JSONException;
+
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.List;
 
 public class DrawView extends View {
@@ -47,8 +52,11 @@ public class DrawView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        Product[] productsArray = NCRRequests.getProducts();
+        System.out.println("products array: " + productsArray);
+        List<Product> productList = Arrays.asList(productsArray);
 
-        List<Point> bestPoints = Driver.optimizeRoute(DemoStoreMap.map(), DemoProductList.list());
+        List<Point> bestPoints = Driver.optimizeRoute(DemoStoreMap.map(), productList);
         System.out.println("best points: " + bestPoints);
 
         float startx = 100f;
@@ -93,7 +101,7 @@ public class DrawView extends View {
         }
 
         fillPaint.setColor(Color.BLUE);
-        for(Product p : DemoProductList.list()){
+        for(Product p : productList){
             canvas.drawCircle(p.getY() * width/(DemoStoreMap.map()[0].length-1) + startx, p.getX() * height/(DemoStoreMap.map().length-1) + starty, 10, fillPaint);
         }
 

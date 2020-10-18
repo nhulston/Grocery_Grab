@@ -25,7 +25,7 @@ import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ncrRequests {
+public class NCRRequests {
     private static String cartId;
     private static double total;
     private static Product[] products;
@@ -291,5 +291,13 @@ public class ncrRequests {
         };
 
         queue.add(jsonObjectRequest);
+    }
+    public static Product findProductByName(String name){
+        for(int i = 0; i < getProducts().length; i++){
+            if(getProducts()[i].getName().equals(name)){
+                return getProducts()[i];
+            }
+        }
+        return null;
     }
 }
