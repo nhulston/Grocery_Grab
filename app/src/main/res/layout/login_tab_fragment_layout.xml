@@ -64,13 +64,14 @@
 
 
     <Button
+        android:id="@+id/login_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/login_button_bg"
         android:text="Login"
         android:textColor="@color/white"
         android:textSize="16sp"
-        android:id="@+id/login_button"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
