@@ -1,6 +1,8 @@
 package com.smithbois.grocerygrab.activities;
 
 import android.app.Dialog;
+import android.graphics.BlendMode;
+import android.graphics.BlendModeColorFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -13,6 +15,8 @@ import com.google.android.material.tabs.TabLayout;
 import com.smithbois.grocerygrab.R;
 import com.smithbois.grocerygrab.adapters.DashboardAdapter;
 import com.smithbois.grocerygrab.dialogs.CheckoutDialog;
+
+import java.util.Objects;
 
 public class DashboardActivity extends AppCompatActivity {
 
@@ -29,9 +33,13 @@ public class DashboardActivity extends AppCompatActivity {
         dashboardTabs = findViewById(R.id.dashboard_tab_layout);
         dashboardPager = findViewById(R.id.dashboard_pager);
 
-        dashboardTabs.addTab(dashboardTabs.newTab().setText("Tab 1"));
-        dashboardTabs.addTab(dashboardTabs.newTab().setText("Tab 2"));
-        dashboardTabs.addTab(dashboardTabs.newTab().setText("Tab 3"));
+        dashboardTabs.addTab(dashboardTabs.newTab().setText("Shopping List"));
+        dashboardTabs.addTab(dashboardTabs.newTab().setText("Store Map"));
+
+        dashboardTabs.getTabAt(0).setIcon(R.drawable.shopping_list_icon);
+        dashboardTabs.getTabAt(1).setIcon(R.drawable.store_map_icon);
+        Objects.requireNonNull(dashboardTabs.getTabAt(0).getIcon()).setColorFilter(new BlendModeColorFilter(getResources().getColor(R.color.black), BlendMode.SRC_ATOP));
+        Objects.requireNonNull(dashboardTabs.getTabAt(1).getIcon()).setColorFilter(new BlendModeColorFilter(getResources().getColor(R.color.secondaryText), BlendMode.SRC_ATOP));
 
         final DashboardAdapter adapter = new DashboardAdapter(getSupportFragmentManager(), this, dashboardTabs.getTabCount());
         dashboardPager.setAdapter(adapter);
@@ -40,11 +48,13 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 dashboardPager.setCurrentItem(tab.getPosition());
+                tab.getIcon().setColorFilter(new BlendModeColorFilter(getResources().getColor(R.color.black), BlendMode.SRC_ATOP));
+
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
+                tab.getIcon().setColorFilter(new BlendModeColorFilter(getResources().getColor(R.color.secondaryText), BlendMode.SRC_ATOP));
             }
 
             @Override

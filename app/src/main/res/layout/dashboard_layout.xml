@@ -18,9 +18,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/white"
+
         app:tabIndicatorColor="@color/mainGreen"
         app:tabMode="fixed"
-        app:tabTextColor="@color/black"
+        app:tabSelectedTextColor="@color/black"
+        app:tabTextColor="@color/secondaryText"
         android:id="@+id/dashboard_tab_layout"
         />
 
