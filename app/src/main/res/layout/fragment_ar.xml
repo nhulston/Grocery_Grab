@@ -9,6 +9,13 @@
 
     <!-- TODO: Update blank fragment layout -->
 
+    <com.smithbois.grocerygrab.util.map.DrawView
+        android:id="@+id/draw_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chooseItemText2" />
     <ImageView
         android:id="@+id/temp_image"
         android:layout_width="match_parent"
@@ -40,7 +47,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/ar_button"
         android:layout_width="200dp"
         android:layout_height="40dp"
         android:layout_marginBottom="16dp"

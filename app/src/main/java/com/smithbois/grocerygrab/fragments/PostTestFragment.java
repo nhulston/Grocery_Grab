@@ -24,6 +24,7 @@ import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.smithbois.grocerygrab.R;
+import com.smithbois.grocerygrab.util.api.ncrRequests;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,6 +36,8 @@ import java.util.Map;
 public class PostTestFragment extends Fragment {
 
     private Button postTestButton;
+    private Button getTestButton;
+    private Button createCartButton;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final ViewGroup root = (ViewGroup) inflater.inflate(R.layout.post_test_layout, container, false);
@@ -45,56 +48,31 @@ public class PostTestFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 try {
-                    requestWithSomeHttpHeaders(context);
+                    ncrRequests.postRequest(context);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
             }
         });
+        getTestButton = root.findViewById(R.id.get_test_button);
+        getTestButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ncrRequests.getRequest(context);
+            }
+        });
+
+        createCartButton = root.findViewById(R.id.create_cart_button);
+        createCartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ncrRequests.createCart(context);
+            }
+        });
 
         return root;
     }
 
-    public void requestWithSomeHttpHeaders(Context context) throws JSONException {
-                RequestQueue queue = Volley.newRequestQueue(context);
-        String url = "https://gateway-staging.ncrcloud.com/emerald/selling-service/v1/carts/1VlfRrThrkiXWHOaPTKAmQ/items";
-        JSONObject jsonBody = new JSONObject();
-        jsonBody.put("scanData", "101");
-        JSONObject quantityJson = new JSONObject();
-        quantityJson.put("unitOfMeasure", "EA");
-        quantityJson.put("value", 1);
-        jsonBody.put("quantity", quantityJson);
-
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonBody, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                System.out.println("Response: " + response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        }) {
-            @Override
-            public Map<String, String> getHeaders() {
-                HashMap<String, String> params = new HashMap<String, String>();
-                String creds = String.format("%s:%s","ea9fc3bc-e3c9-43cc-96bd-6a6fa3c36751","password123!");
-                String auth = "Basic " + Base64.encodeToString(creds.getBytes(), Base64.DEFAULT);
-                params.put("Authorization", auth);
-
-                params.put("content-type", "application/json");
-                params.put("nep-organization", "aa317d804243466bb23f1a9f236d166d");
-                params.put("nep-enterprise-unit", "b6a4f865404d4b6ab2c70ab1bd9a5b71");
-
-                return params;
-            }
-        };
-
-
-        queue.add(jsonObjectRequest);
-    }
 
 }

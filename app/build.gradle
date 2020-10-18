@@ -20,6 +20,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -32,5 +36,12 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    implementation 'com.google.ar.sceneform.ux:sceneform-ux:1.17.1'
+    implementation 'com.google.ar.sceneform:core:1.17.1'
 
 }
+apply plugin: 'com.google.ar.sceneform.plugin'
+sceneform.asset('sampledata/materials.obj', // 'Source Asset Path' specified during import.
+        'default',                         // 'Material Path' specified during import.
+        'sampledata/materials.sfa',             // '.sfa Output Path' specified during import.
+        'src/main/res/raw/materials')

@@ -147,47 +147,6 @@ public class ShoppingListFragment extends Fragment {
         return root;
     }
 
-    public void requestWithSomeHttpHeaders(Context context) {
-        RequestQueue queue = Volley.newRequestQueue(context);
-        String url = "https://gateway-staging.ncrcloud.com/catalog/2/item-details/2/102";
-        StringRequest getRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>()
-                {
-                    public void onResponse(String response) {
-                        System.out.println(response);
-                        int a = response.indexOf("\"price\":");
-                        int b = response.indexOf(",\"currency\"");
-                        double cost = Double.parseDouble(response.substring(a + 8, b));
-                        NumberFormat formatter = NumberFormat.getCurrencyInstance();
-                        itemCost = formatter.format(cost);
-                    }
-                },
-                new Response.ErrorListener()
-                {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // TODO Auto-generated method stub
-                        Log.d("ERROR","error => "+error.toString());
-                    }
-                }
-        ) {
-            @Override
-            public Map<String, String> getHeaders() {
-                HashMap<String, String> params = new HashMap<String, String>();
-                String creds = String.format("%s:%s","ea9fc3bc-e3c9-43cc-96bd-6a6fa3c36751","password123!");
-                String auth = "Basic " + Base64.encodeToString(creds.getBytes(), Base64.DEFAULT);
-                params.put("Authorization", auth);
-
-                params.put("content-type", "application/json");
-                params.put("nep-organization", "aa317d804243466bb23f1a9f236d166d");
-                params.put("nep-enterprise-unit", "b6a4f865404d4b6ab2c70ab1bd9a5b71");
-
-                return params;
-            }
-
-        };
-        queue.add(getRequest);
-    }
 
     public void showAddItemLayout(int position, Context context, final ViewGroup root){
         String item = adapter.getItem(position);
