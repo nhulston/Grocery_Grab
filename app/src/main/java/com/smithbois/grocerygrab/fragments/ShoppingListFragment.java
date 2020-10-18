@@ -47,7 +47,6 @@ import java.util.Map;
 
 public class ShoppingListFragment extends Fragment {
 
-    private static String itemCost;
     private static final String[] ITEMS = new String[] {
             "Asparagus", "Broccoli", "Carrots", "Cauliflower", "Celery", "Corn", "Cucumbers", "Lettuce", "Greens", "Mushrooms", "Onions", "Peppers", "Potatoes", "Spinach", "Squash", "Zucchini", "Tomatoes",
             "Apples", "Avocados", "Bananas", "Berries", "Cherries", "Grapefruit", "Grapes", "Kiwis", "Lemons", "Limes", "Melon", "Oranges", "Peaches", "Nectarines", "Pears", "Plums", "Bagels", "Chip dip",
@@ -70,7 +69,6 @@ public class ShoppingListFragment extends Fragment {
             "Postage stamps", "Automotive", "Batteries", "Charcoal", "Propane", "Flowers", "Greeting card", "Insect repellent", "Light bulbs", "Newspaper", "Magazine", "Water"
     };
     private AutoCompleteTextView editText;
-    private ImageView plusButton;
     private ArrayAdapter<String> adapter;
 
     @Nullable
@@ -80,29 +78,19 @@ public class ShoppingListFragment extends Fragment {
         final Context context = getContext();
 
         editText = root.findViewById(R.id.chooseItemText);
-        plusButton = root.findViewById(R.id.plus_icon);
 
         adapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, ITEMS);
         editText.setAdapter(adapter);
 
-        editText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        editText.setOnItemClickListener((parent, view, position, id) -> showAddItemLayout(position, context, root));
 
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                showAddItemLayout(position, context, root);
-            }
-        });
+        root.findViewById(R.id.back_btn).setOnClickListener(v -> {
+            root.findViewById(R.id.invis_layout).setVisibility(View.GONE);
+            root.findViewById(R.id.fade_rectangle).setVisibility(View.GONE);
 
-        root.findViewById(R.id.back_btn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                root.findViewById(R.id.invis_layout).setVisibility(View.GONE);
-                root.findViewById(R.id.fade_rectangle).setVisibility(View.GONE);
-
-                InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(editText.getWindowToken(),
-                        InputMethodManager.RESULT_UNCHANGED_SHOWN);
-            }
+            InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(editText.getWindowToken(),
+                    InputMethodManager.RESULT_UNCHANGED_SHOWN);
         });
 
         Button addButton = root.findViewById(R.id.add_button);
@@ -115,12 +103,9 @@ public class ShoppingListFragment extends Fragment {
         });
 
         FloatingActionButton fButton = root.findViewById(R.id.floatingActionButton);
-        fButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                root.findViewById(R.id.invis_layout).setVisibility(View.VISIBLE);
-                root.findViewById(R.id.fade_rectangle).setVisibility(View.VISIBLE);
-            }
+        fButton.setOnClickListener(v -> {
+            root.findViewById(R.id.invis_layout).setVisibility(View.VISIBLE);
+            root.findViewById(R.id.fade_rectangle).setVisibility(View.VISIBLE);
         });
 
         root.findViewById(R.id.fade_rectangle).setOnClickListener(new View.OnClickListener() {
@@ -171,7 +156,7 @@ public class ShoppingListFragment extends Fragment {
                 String s = (String) btn.getText();
                 Cart.getCart().add(s);
                 linearLayout.removeView(btn);
-                TextView tv = root.findViewById(R.id.cart_count);
+                TextView tv = getActivity().findViewById(R.id.cart_count);
                 tv.setText(String.valueOf(Integer.parseInt(tv.getText().toString()) + 1));
             }
         });

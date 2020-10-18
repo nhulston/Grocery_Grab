@@ -83,7 +83,7 @@ public class ARActivity extends AppCompatActivity {
             return;
         }
         if(frame.getCamera().getTrackingState()== TrackingState.TRACKING && !placed){
-            Pose pos = frame.getCamera().getPose().compose(Pose.makeTranslation(0, 0, -0.3f));
+            Pose pos = frame.getCamera().getPose().compose(Pose.makeTranslation(0f, 0, -1f));
             Anchor anchor = arFragment.getArSceneView().getSession().createAnchor(pos);
             AnchorNode anchorNode = new AnchorNode(anchor);
             anchorNode.setParent(arFragment.getArSceneView().getScene());
@@ -92,7 +92,7 @@ public class ARActivity extends AppCompatActivity {
             Node arrow = new Node();
             arrow.setParent(anchorNode);
             arrow.setRenderable(arrowRenderable);
-            arrow.setLocalRotation(Quaternion.axisAngle(new Vector3(1f, 0, 0), 90f));
+            arrow.setWorldRotation(Quaternion.axisAngle(new Vector3(0f, 0, 0), 0f));
             placed = true;
         }
     }

@@ -1,19 +1,9 @@
 package com.smithbois.grocerygrab.activities;
 
-import android.content.Context;
+import android.app.Dialog;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.ImageButton;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,8 +12,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 import com.smithbois.grocerygrab.R;
 import com.smithbois.grocerygrab.adapters.DashboardAdapter;
-import com.smithbois.grocerygrab.adapters.LoginAdapter;
-import com.smithbois.grocerygrab.util.Cart;
+import com.smithbois.grocerygrab.dialogs.CheckoutDialog;
 
 public class DashboardActivity extends AppCompatActivity {
 
@@ -64,7 +53,11 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
 
-
-
+        ImageButton btn = findViewById(R.id.cart_button);
+        btn.setOnClickListener(v -> {
+            Dialog dialog = CheckoutDialog.onCreateDialog(this);
+            dialog.getWindow().setLayout(10, 500);
+            dialog.show();
+        });
     }
 }
