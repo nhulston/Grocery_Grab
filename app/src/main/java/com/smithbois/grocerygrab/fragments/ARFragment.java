@@ -72,6 +72,20 @@ public class ARFragment extends Fragment {
             editText.setVisibility(View.GONE);
             //root.findViewById(R.id.store_map_text).setVisibility(View.VISIBLE);
             root.findViewById(R.id.draw_view).setVisibility(View.VISIBLE);
+            root.findViewById(R.id.textView2).setVisibility(View.VISIBLE);
+            root.findViewById(R.id.textView4).setVisibility(View.VISIBLE);
+            root.findViewById(R.id.textView8).setVisibility(View.VISIBLE);
+            root.findViewById(R.id.textView10).setVisibility(View.VISIBLE);
+            root.findViewById(R.id.textView12).setVisibility(View.VISIBLE);
+            root.findViewById(R.id.textView14).setVisibility(View.VISIBLE);
+            root.findViewById(R.id.textView9).setVisibility(View.VISIBLE);
+            root.findViewById(R.id.textView11).setVisibility(View.VISIBLE);
+            root.findViewById(R.id.textView13).setVisibility(View.VISIBLE);
+            root.findViewById(R.id.textView15).setVisibility(View.VISIBLE);
+            root.findViewById(R.id.view3).setVisibility(View.VISIBLE);
+            root.findViewById(R.id.view5).setVisibility(View.VISIBLE);
+            root.findViewById(R.id.view6).setVisibility(View.VISIBLE);
+            root.findViewById(R.id.view8).setVisibility(View.VISIBLE);
         });
         editText.setOnClickListener(v -> {
             editText.showDropDown();

@@ -9,11 +9,50 @@
 
     <!-- TODO: Update blank fragment layout -->
 
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:text="Aisle 8"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView2"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <View
+        android:id="@+id/view8"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/primaryBorder"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="Coca Cola"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/ar_button"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <View
         android:id="@+id/view3"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/primaryBorder"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/textView8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,6 +63,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/primaryBorder"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/textView10"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,6 +74,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/primaryBorder"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/textView12"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,16 +88,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chooseItemText2" />
-    <ImageView
-        android:id="@+id/temp_image"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/f95c55d9cf0abaa8ebc2eae50d3d8d5e"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <AutoCompleteTextView
         android:id="@+id/chooseItemText2"
@@ -123,11 +154,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginBottom="16dp"
-        android:text="Yogurt"
+        android:text="Water"
         android:textColor="@color/black"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/ar_button"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -135,10 +166,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginBottom="16dp"
-        android:text="Rice"
+        android:text="Yogurt"
         android:textColor="@color/black"
         android:textSize="18sp"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/textView8"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -147,10 +178,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginBottom="16dp"
-        android:text="Water"
+        android:text="Rice"
         android:textColor="@color/black"
         android:textSize="18sp"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/textView10"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -159,10 +190,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginBottom="16dp"
-        android:text="Bananas"
+        android:text="Banana"
         android:textColor="@color/black"
         android:textSize="18sp"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/textView12"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -171,9 +202,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
-        android:text="Aisle 4"
+        android:text="Aisle 7"
         android:textColor="@color/black"
         android:textSize="18sp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/textView8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView8" />
@@ -183,9 +215,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
-        android:text="Aisle 3"
+        android:text="Aisle 5"
         android:textColor="@color/black"
         android:textSize="18sp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/textView10"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView10"
@@ -196,9 +229,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
-        android:text="Aisle 2"
+        android:text="Aisle 3"
         android:textColor="@color/black"
         android:textSize="18sp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/textView12"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView12"
@@ -209,9 +243,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
-        android:text="Aisle 1"
+        android:text="Aisle 2"
         android:textColor="@color/black"
         android:textSize="18sp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/textView14"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView14"

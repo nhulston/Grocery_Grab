@@ -35,6 +35,6 @@ public class LoginAdapter extends FragmentPagerAdapter {
                 return signUpTabFragment;
             default:
                 return null;
-        }
+        } 
     }
 }
