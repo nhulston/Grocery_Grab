@@ -3,6 +3,6 @@
 
     <corners android:radius="20dp"/>
 
-    <solid android:color="@color/magenta"/>
+    <solid android:color="@color/uiPink"/>
 
 </shape>

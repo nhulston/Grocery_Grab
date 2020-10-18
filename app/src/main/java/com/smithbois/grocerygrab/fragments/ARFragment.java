@@ -55,43 +55,32 @@ public class ARFragment extends Fragment {
         final ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, arr);
         editText.setAdapter(adapter);
 
-        editText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(editText.getWindowToken(),
-                        InputMethodManager.RESULT_UNCHANGED_SHOWN);
-                root.findViewById(R.id.fade_rectangle2).setVisibility(View.GONE);
-                // TODO code here to set map visible!
-            }
+        editText.setOnItemClickListener((parent, view, position, id) -> {
+            InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(editText.getWindowToken(),
+                    InputMethodManager.RESULT_UNCHANGED_SHOWN);
+            root.findViewById(R.id.fade_rectangle2).setVisibility(View.GONE);
+            editText.setVisibility(View.GONE);
+            root.findViewById(R.id.store_map_text).setVisibility(View.VISIBLE);
+            root.findViewById(R.id.draw_view).setVisibility(View.VISIBLE);
+            // TODO code here to set map visible!
         });
-        editText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                editText.showDropDown();
-                root.findViewById(R.id.fade_rectangle2).setVisibility(View.VISIBLE);
-            }
+        editText.setOnClickListener(v -> {
+            editText.showDropDown();
+            root.findViewById(R.id.fade_rectangle2).setVisibility(View.VISIBLE);
         });
 
-        root.findViewById(R.id.fade_rectangle2).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                root.findViewById(R.id.fade_rectangle2).setVisibility(View.GONE);
+        root.findViewById(R.id.fade_rectangle2).setOnClickListener(v -> {
+            root.findViewById(R.id.fade_rectangle2).setVisibility(View.GONE);
 
-                InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(editText.getWindowToken(),
-                        InputMethodManager.RESULT_UNCHANGED_SHOWN);
-            }
+            InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(editText.getWindowToken(),
+                    InputMethodManager.RESULT_UNCHANGED_SHOWN);
         });
 
-        arButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), ARActivity.class);
-                startActivity(intent);
-            }
+        arButton.setOnClickListener(view -> {
+            Intent intent = new Intent(getActivity(), ARActivity.class);
+            startActivity(intent);
         });
 
         return root;
